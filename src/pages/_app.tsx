@@ -131,8 +131,6 @@ export default function App() {
         <div className="bg-landing-bg h-screen w-screen max-w-screen overflow-x-hidden flex flex-col justify-between gap-y-10
           <AppHeader/>
           <div>
-    
-
               <div className="flex justify-center">
                 <div className="max-w-[420px] mt-8 rounded-3xl flex flex-col md:flex-row w-full relative border border-white/10">
                   <ShouldWrapWalletProvider>
