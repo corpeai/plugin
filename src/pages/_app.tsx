@@ -131,23 +131,6 @@ export default function App() {
         <div className="bg-landing-bg h-screen w-screen max-w-screen overflow-x-hidden flex flex-col justify-between gap-y-10
           <AppHeader/>
           <div>
-              <div className="flex justify-center">
-                <div className="max-w-[420px] mt-8 rounded-3xl flex flex-col md:flex-row w-full relative border border-white/10">
-                  <ShouldWrapWalletProvider>
-                    <div className=" h-full w-full rounded-xl flex flex-col">
-                      <div className="flex flex-row justify-between py-3 px-2 border-b border
-                        
-                      </div>
-                      <span className="flex justify-center text-center text-xs text-[#9D9DA6] mb-2">
-                        {displayMode === 'integrated'
-                          ? 'Jupiter renders as part of a widget that can be placed at different positions on your dApp.'
-                          : null}
-                      </span>
-                    </div>
-                  </ShouldWrapWalletProvider>
-                </div>
-              </div>
-            </div>
           </div>
           <Upsell/>
           <Footer />
