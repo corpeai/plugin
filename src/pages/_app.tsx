@@ -10,16 +10,16 @@ import Footer from 'src/components/Footer/Footer';
 
 import { SolflareWalletAdapter, UnsafeBurnerWalletAdapter } from '@solana/wallet-adapter-wallets';
 import { FormProvider, useForm, useWatch } from 'react-hook-form';
-//import CodeBlocks from 'src/components/CodeBlocks/CodeBlocks';
-//import FormConfigurator from 'src/components/FormConfigurator';
+import CodeBlocks from 'src/components/CodeBlocks/CodeBlocks';
+import FormConfigurator from 'src/components/FormConfigurator';
 import { IFormConfigurator, INITIAL_FORM_CONFIG } from 'src/constants';
 import { IInit } from 'src/types';
-//import V2SexyChameleonText from 'src/components/SexyChameleonText/V2SexyChameleonText';
+import V2SexyChameleonText from 'src/components/SexyChameleonText/V2SexyChameleonText';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { setPluginInView } from 'src/stores/jotai-plugin-in-view';
 import { cn } from 'src/misc/cn';
-//import { PluginGroup } from 'src/content/PluginGroup';
-//import SideDrawer from 'src/components/SideDrawer/SideDrawer';
+import { PluginGroup } from 'src/content/PluginGroup';
+import SideDrawer from 'src/components/SideDrawer/SideDrawer';
 import JupiterLogo from 'src/icons/JupiterLogo';
 import CloseIcon from 'src/icons/CloseIcon';
 import { Upsell } from 'src/components/Upsell';
@@ -48,6 +48,39 @@ const queryClient = new QueryClient({
     },
   },
 });
+
+const PLUGIN_MODE: { label: string; value: IInit['displayMode'] }[] = [
+  {
+    label: 'Modal',
+    value: 'modal',
+  },
+  {
+    label: 'Integrated',
+    value: 'integrated',
+  },
+  {
+    label: 'Widget',
+    value: 'widget',
+  },
+];
+
+export default function App() {
+  const [displayMode, setDisplayMode] = useState<IInit['displayMode']>('integrated');
+  const [isSideDrawerOpen, setIsSideDrawerOpen] = useState(false);
+  const [sideDrawerTab, setSideDrawerTab] = useState<'config' | 'snippet'>('config');
+
+  // Cleanup on tab change
+  useEffect(() => {
+    if (window.Jupiter._instance) {
+      window.Jupiter._instance = null;
+    }
+
+    setPluginInView(false);
+  }, [displayMode]);
+
+  const methods = useForm<IFormConfigurator>({
+    defaultValues: INITIAL_FORM_CONFIG,
+  });
 
   const { control } = methods;
   const simulateWalletPassthrough = useWatch({ control, name: 'simulateWalletPassthrough' });
@@ -102,6 +135,22 @@ const queryClient = new QueryClient({
           handle: '@JupiterExchange',
         }}
       />
+              <div className="flex justify-between items-center py-4 px-4 text-white gap-2 border-b border-white/10">
+                <h1 className="flex items-center text-lg font-semibold text-white">
+                  <JupiterLogo />
+                  <span className="ml-3">Jupiter</span>
+                </h1>
+                <button
+                  className="p-2 text-white/50 hover:text-gray-300 transition-colors"
+                  onClick={() => setIsSideDrawerOpen(false)}
+                  aria-label="Close drawer"
+                >
+                  <CloseIcon width={20} height={20} />
+                </button>
+              </div>
+          <AppHeader/>
+          <div>
+              </div>
                           <div
                             className={cn('text-white text-center', {
                               hidden: !simulateWalletPassthrough,
@@ -109,6 +158,9 @@ const queryClient = new QueryClient({
                           >
                             <UnifiedWalletButton />
                           </div>
+                  </ShouldWrapWalletProvider>
+                </div>
+              </div>
             </div>
           </div>
           <Upsell/>
