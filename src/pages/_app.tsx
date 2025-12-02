@@ -135,7 +135,6 @@ export default function App() {
           handle: '@JupiterExchange',
         }}
       />
-      <FormProvider {...methods}>
         <div className="bg-landing-bg h-screen w-screen max-w-screen overflow-x-hidden flex flex-col justify-between gap-y-10">
           <AppHeader/>
           <div>
