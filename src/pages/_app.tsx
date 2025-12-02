@@ -3,7 +3,7 @@ import JupiterApp from 'src/components/Jupiter';
 import { ContextProvider } from 'src/contexts/ContextProvider';
 import { ScreenProvider } from 'src/contexts/ScreenProvider';
 import WalletPassthroughProvider from 'src/contexts/WalletPassthroughProvider';
-import { appProps } from './library';
+import { appProps } from 'src/library';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useMemo } from 'react';
 
