@@ -130,9 +130,6 @@ export default function App() {
       />
       <FormProvider {...methods}>
         <div className="bg-landing-bg h-screen w-screen max-w-screen overflow-x-hidden flex flex-col justify-between gap-y-10">
-          {/* Side Drawer */}
-          <SideDrawer isOpen={isSideDrawerOpen} setIsOpen={setIsSideDrawerOpen}>
-            <div className="flex flex-col h-full">
               <div className="flex justify-between items-center py-4 px-4 text-white gap-2 border-b border-white/10">
                 <h1 className="flex items-center text-lg font-semibold text-white">
                   <JupiterLogo />
