@@ -1,4 +1,3 @@
-
 import { UnifiedWalletButton, UnifiedWalletProvider } from '@jup-ag/wallet-adapter';
 import { DefaultSeo } from 'next-seo';
 import React, { ReactNode, useEffect, useMemo, useState } from 'react';
@@ -60,7 +59,6 @@ const PLUGIN_MODE: { label: string; value: IInit['displayMode'] }[] = [
 export default function App() {
   const [displayMode, setDisplayMode] = useState<IInit['displayMode']>('integrated');
   const [isSideDrawerOpen, setIsSideDrawerOpen] = useState(false);
-  const [sideDrawerTab, setSideDrawerTab] = useState<'config' | 'snippet'>('');
 
   // Cleanup on tab change
   useEffect(() => {
@@ -130,11 +128,41 @@ export default function App() {
       />
       <FormProvider {...methods}>
         <div className="bg-landing-bg h-screen w-screen max-w-screen overflow-x-hidden flex flex-col justify-between gap-y-10">
+          {/* Side Drawer */}
+          <SideDrawer isOpen={isSideDrawerOpen} setIsOpen={setIsSideDrawerOpen}>
+            <div className="flex flex-col h-full">
               <div className="flex justify-between items-center py-4 px-4 text-white gap-2 border-b border-white/10">
                 <h1 className="flex items-center text-lg font-semibold text-white">
                   <JupiterLogo />
                   <span className="ml-3">Jupiter</span>
                 </h1>
+                <button
+                  className="p-2 text-white/50 hover:text-gray-300 transition-colors"
+                  onClick={() => setIsSideDrawerOpen(false)}
+                  aria-label="Close drawer"
+                >
+                  <CloseIcon width={20} height={20} />
+                </button>
+              </div>
+
+              <div className="flex justify-between items-center my-4 mx-4 text-white gap-2 border border-white/10 rounded-full">
+                <button
+                  className={cn('flex-1 p-2 rounded-full text-landing-primary', {
+                    'bg-landing-primary/20 ': sideDrawerTab === 'config',
+                  })}
+                  onClick={() => setSideDrawerTab('config')}
+                >
+                  Config
+                </button>
+                <button
+                  className={cn('flex-1 p-2 rounded-full text-landing-primary', {
+                    'bg-landing-primary/20 ': sideDrawerTab === 'snippet',
+                  })}
+                  onClick={() => setSideDrawerTab('snippet')}
+                >
+                  Snippet
+                </button>
+              </div>
               <div className="flex-1 overflow-y-auto px-4 py-2">
                 {sideDrawerTab === 'config' ? <FormConfigurator /> : <CodeBlocks displayMode={'integrated'} />}
               </div>
@@ -201,9 +229,7 @@ export default function App() {
                         <PluginGroup tab={displayMode} />
                       </div>
                       <span className="flex justify-center text-center text-xs text-[#9D9DA6] mb-2">
-                        {displayMode === 'modal' ? 'Jupiter renders as a modal and takes up the whole screen.' : null}
-                        {displayMode === 'integrated' ? 'Jupiter renders as a part of your dApp.' : null}
-                        {displayMode === 'widget'
+                        {displayMode === 'integrated'
                           ? 'Jupiter renders as part of a widget that can be placed at different positions on your dApp.'
                           : null}
                       </span>
