@@ -50,10 +50,7 @@ const queryClient = new QueryClient({
 });
 
 const PLUGIN_MODE: { label: string; value: IInit['displayMode'] }[] = [
-  {
-    label: 'Integrated',
-    value: 'integrated',
-  },
+  { },
 ];
 
 export default function App() {
