@@ -10,16 +10,16 @@ import Footer from 'src/components/Footer/Footer';
 
 import { SolflareWalletAdapter, UnsafeBurnerWalletAdapter } from '@solana/wallet-adapter-wallets';
 import { FormProvider, useForm, useWatch } from 'react-hook-form';
-import CodeBlocks from 'src/components/CodeBlocks/CodeBlocks';
-import FormConfigurator from 'src/components/FormConfigurator';
+//import CodeBlocks from 'src/components/CodeBlocks/CodeBlocks';
+//import FormConfigurator from 'src/components/FormConfigurator';
 import { IFormConfigurator, INITIAL_FORM_CONFIG } from 'src/constants';
 import { IInit } from 'src/types';
-import V2SexyChameleonText from 'src/components/SexyChameleonText/V2SexyChameleonText';
+/import V2SexyChameleonText from 'src/components/SexyChameleonText/V2SexyChameleonText';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { setPluginInView } from 'src/stores/jotai-plugin-in-view';
 import { cn } from 'src/misc/cn';
 import { PluginGroup } from 'src/content/PluginGroup';
-import SideDrawer from 'src/components/SideDrawer/SideDrawer';
+//import SideDrawer from 'src/components/SideDrawer/SideDrawer';
 import JupiterLogo from 'src/icons/JupiterLogo';
 import CloseIcon from 'src/icons/CloseIcon';
 import { Upsell } from 'src/components/Upsell';
@@ -48,39 +48,6 @@ const queryClient = new QueryClient({
     },
   },
 });
-
-const PLUGIN_MODE: { label: string; value: IInit['displayMode'] }[] = [
-  {
-    label: 'Modal',
-    value: 'modal',
-  },
-  {
-    label: 'Integrated',
-    value: 'integrated',
-  },
-  {
-    label: 'Widget',
-    value: 'widget',
-  },
-];
-
-export default function App() {
-  const [displayMode, setDisplayMode] = useState<IInit['displayMode']>('integrated');
-  const [isSideDrawerOpen, setIsSideDrawerOpen] = useState(false);
-  const [sideDrawerTab, setSideDrawerTab] = useState<'config' | 'snippet'>('config');
-
-  // Cleanup on tab change
-  useEffect(() => {
-    if (window.Jupiter._instance) {
-      window.Jupiter._instance = null;
-    }
-
-    setPluginInView(false);
-  }, [displayMode]);
-
-  const methods = useForm<IFormConfigurator>({
-    defaultValues: INITIAL_FORM_CONFIG,
-  });
 
   const { control } = methods;
   const simulateWalletPassthrough = useWatch({ control, name: 'simulateWalletPassthrough' });
@@ -118,8 +85,8 @@ export default function App() {
         openGraph={{
           type: 'website',
           locale: 'en',
-          title: 'Plugin: add Jupiter Swap to your website or app',
-          description: 'Bring the perfect swap to any web app. Jupiter Plugin is the easiest way to add full Ultra swap functionality to any website.',
+          title: '',
+          description: '',
           url: 'https://plugin.jup.ag/',
           site_name: 'Jupiter Plugin',
           images: [
