@@ -6,7 +6,7 @@ import { Connection, PublicKey } from '@solana/web3.js';
 import { WalletContextState } from '@jup-ag/wallet-adapter';
 import EventEmitter from 'events';
 import { QuoteResponse, SwapResult } from 'src/contexts/SwapContext';
-import { TransactionError } from './TransactionError';
+import { TransactionError } from 'src/types/TransactionError';
 
 declare global {
   interface Window {
