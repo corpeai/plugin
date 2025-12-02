@@ -1,5 +1,5 @@
 import { Provider, useAtom } from 'jotai';
-import JupiterApp from './components/Jupiter';
+import JupiterApp from '@/components/Jupiter';
 import { ContextProvider } from './contexts/ContextProvider';
 import { ScreenProvider } from './contexts/ScreenProvider';
 import WalletPassthroughProvider from './contexts/WalletPassthroughProvider';
