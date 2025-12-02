@@ -14,7 +14,7 @@ import { FormProvider, useForm, useWatch } from 'react-hook-form';
 //import FormConfigurator from 'src/components/FormConfigurator';
 import { IFormConfigurator, INITIAL_FORM_CONFIG } from 'src/constants';
 import { IInit } from 'src/types';
-/import V2SexyChameleonText from 'src/components/SexyChameleonText/V2SexyChameleonText';
+//import V2SexyChameleonText from 'src/components/SexyChameleonText/V2SexyChameleonText';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { setPluginInView } from 'src/stores/jotai-plugin-in-view';
 import { cn } from 'src/misc/cn';
