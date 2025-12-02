@@ -146,22 +146,6 @@ export default function App() {
               </div>
 
               <div className="flex justify-between items-center my-4 mx-4 text-white gap-2 border border-white/10 rounded-full">
-                <button
-                  className={cn('flex-1 p-2 rounded-full text-landing-primary', {
-                    'bg-landing-primary/20 ': sideDrawerTab === 'config',
-                  })}
-                  onClick={() => setSideDrawerTab('config')}
-                >
-                  Config
-                </button>
-                <button
-                  className={cn('flex-1 p-2 rounded-full text-landing-primary', {
-                    'bg-landing-primary/20 ': sideDrawerTab === 'snippet',
-                  })}
-                  onClick={() => setSideDrawerTab('snippet')}
-                >
-                  Snippet
-                </button>
               </div>
               <div className="flex-1 overflow-y-auto px-4 py-2">
                 {sideDrawerTab === 'config' ? <FormConfigurator /> : <CodeBlocks displayMode={'integrated'} />}
