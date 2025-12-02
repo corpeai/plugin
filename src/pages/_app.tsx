@@ -1,8 +1,8 @@
 import { Provider, useAtom } from 'jotai';
 import JupiterApp from 'src/components/Jupiter';
-import { ContextProvider } from './contexts/ContextProvider';
-import { ScreenProvider } from './contexts/ScreenProvider';
-import WalletPassthroughProvider from './contexts/WalletPassthroughProvider';
+import { ContextProvider } from 'src/contexts/ContextProvider';
+import { ScreenProvider } from 'src/contexts/ScreenProvider';
+import WalletPassthroughProvider from 'src/contexts/WalletPassthroughProvider';
 import { appProps } from './library';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useMemo } from 'react';
