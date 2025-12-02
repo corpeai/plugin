@@ -10,16 +10,16 @@ import Footer from 'src/components/Footer/Footer';
 
 import { SolflareWalletAdapter, UnsafeBurnerWalletAdapter } from '@solana/wallet-adapter-wallets';
 import { FormProvider, useForm, useWatch } from 'react-hook-form';
-//import CodeBlocks from 'src/components/CodeBlocks/CodeBlocks';
-//import FormConfigurator from 'src/components/FormConfigurator';
+import CodeBlocks from 'src/components/CodeBlocks/CodeBlocks';
+import FormConfigurator from 'src/components/FormConfigurator';
 import { IFormConfigurator, INITIAL_FORM_CONFIG } from 'src/constants';
 import { IInit } from 'src/types';
-//import V2SexyChameleonText from 'src/components/SexyChameleonText/V2SexyChameleonText';
+import V2SexyChameleonText from 'src/components/SexyChameleonText/V2SexyChameleonText';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { setPluginInView } from 'src/stores/jotai-plugin-in-view';
 import { cn } from 'src/misc/cn';
 import { PluginGroup } from 'src/content/PluginGroup';
-//import SideDrawer from 'src/components/SideDrawer/SideDrawer';
+import SideDrawer from 'src/components/SideDrawer/SideDrawer';
 import JupiterLogo from 'src/icons/JupiterLogo';
 import CloseIcon from 'src/icons/CloseIcon';
 import { Upsell } from 'src/components/Upsell';
@@ -48,6 +48,39 @@ const queryClient = new QueryClient({
     },
   },
 });
+
+const PLUGIN_MODE: { label: string; value: IInit['displayMode'] }[] = [
+  {
+    label: 'Modal',
+    value: 'modal',
+  },
+  {
+    label: 'Integrated',
+    value: 'integrated',
+  },
+  {
+    label: 'Widget',
+    value: 'widget',
+  },
+];
+
+export default function App() {
+  const [displayMode, setDisplayMode] = useState<IInit['displayMode']>('integrated');
+  const [isSideDrawerOpen, setIsSideDrawerOpen] = useState(false);
+  const [sideDrawerTab, setSideDrawerTab] = useState<'config' | 'snippet'>('config');
+
+  // Cleanup on tab change
+  useEffect(() => {
+    if (window.Jupiter._instance) {
+      window.Jupiter._instance = null;
+    }
+
+    setPluginInView(false);
+  }, [displayMode]);
+
+  const methods = useForm<IFormConfigurator>({
+    defaultValues: INITIAL_FORM_CONFIG,
+  });
 
   const { control } = methods;
   const simulateWalletPassthrough = useWatch({ control, name: 'simulateWalletPassthrough' });
@@ -85,8 +118,8 @@ const queryClient = new QueryClient({
         openGraph={{
           type: 'website',
           locale: 'en',
-          title: '',
-          description: '',
+          title: 'Plugin: add Jupiter Swap to your website or app',
+          description: 'Bring the perfect swap to any web app. Jupiter Plugin is the easiest way to add full Ultra swap functionality to any website.',
           url: 'https://plugin.jup.ag/',
           site_name: 'Jupiter Plugin',
           images: [
@@ -102,30 +135,25 @@ const queryClient = new QueryClient({
           handle: '@JupiterExchange',
         }}
       />
-              <div className="flex justify-between items-center py-4 px-4 text-white gap-2 border-b border-white/10">
-                <h1 className="flex items-center text-lg font-semibold text-white">
-                  <JupiterLogo />
-                  <span className="ml-3">Jupiter</span>
-                </h1>
-                <button
-                  className="p-2 text-white/50 hover:text-gray-300 transition-colors"
-                  onClick={() => setIsSideDrawerOpen(false)}
-                  aria-label="Close drawer"
-                >
-                  <CloseIcon width={20} height={20} />
-                </button>
-              </div>
+      <FormProvider {...methods}>
+        <div className="bg-landing-bg h-screen w-screen max-w-screen overflow-x-hidden flex flex-col justify-between gap-y-10">
           <AppHeader/>
           <div>
+            <div className="px-2">
+              <div className="flex flex-col items-center h-full w-full md:mt-5">
+                <div className="flex flex-col justify-center items-center text-center">
+                  <div className="flex space-x-2">
+                    <V2SexyChameleonText animate={false} className="text-4xl md:text-[60px] md:h-[66px] font-semibold flex flex-row items-center ">
+                      Jupiter Plugin
+                    </V2SexyChameleonText>
+                  </div>
+                  <p className="text-[#9D9DA6] text-md mt-4 heading-[24px]">
+                    Seamlessly embed a full Jupiter Ultra Swap directly in your application
+                  </p>
+                </div>
               </div>
-                          <div
-                            className={cn('text-white text-center', {
-                              hidden: !simulateWalletPassthrough,
-                            })}
-                          >
-                            <UnifiedWalletButton />
-                          </div>
-                  </ShouldWrapWalletProvider>
+              <div className="flex justify-center">
+                <div className="max-w-[420px] mt-8 rounded-3xl flex flex-col md:flex-row w-full relative border border-white/10">
                 </div>
               </div>
             </div>
@@ -133,7 +161,7 @@ const queryClient = new QueryClient({
           <Upsell/>
           <Footer />
         </div>
-      </FormProvider>
     </QueryClientProvider>
   );
 }
+ 
