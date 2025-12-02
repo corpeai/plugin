@@ -49,12 +49,10 @@ const queryClient = new QueryClient({
   },
 });
 
-const PLUGIN_MODE: { label: string; value: IInit['displayMode'] }[] = [
-  { },
-];
+const PLUGIN_MODE: { label: string; value: IInit['displayMode'] }[] = [];
 
 export default function App() {
-  const [displayMode, setDisplayMode] = useState<IInit['displayMode']>('integrated');
+  const [displayMode, setDisplayMode] = useState<IInit['displayMode']>('');
   const [isSideDrawerOpen, setIsSideDrawerOpen] = useState(false);
 
   // Cleanup on tab change
