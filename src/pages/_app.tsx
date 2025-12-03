@@ -18,6 +18,7 @@ import V2SexyChameleonText from 'src/components/SexyChameleonText/V2SexyChameleo
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { setPluginInView } from 'src/stores/jotai-plugin-in-view';
 import { cn } from 'src/misc/cn';
+import IntegratedPlugin from 'src/content/IntegratedPlugin';
 import { IntegratedPlugin } from 'src/content/IntegratedPlugin';
 import SideDrawer from 'src/components/SideDrawer/SideDrawer';
 import JupiterLogo from 'src/icons/JupiterLogo';
