@@ -1,5 +1,7 @@
 import { UnifiedWalletButton, UnifiedWalletProvider } from '@jup-ag/wallet-adapter';
 import { DefaultSeo } from 'next-seo';
+import type { AppProps } from "next/app";
+import Script from "next/script";
 import React, { ReactNode, useEffect, useMemo, useState } from 'react';
 
 import 'tailwindcss/tailwind.css';
@@ -49,6 +51,7 @@ const queryClient = new QueryClient({
   },
 });
 
+
 window.Jupiter.init({
   displayMode: "integrated",
   integratedTargetId: "target-container",
@@ -65,7 +68,7 @@ const PLUGIN_MODE: { label: string; value: IInit['displayMode'] }[] = [
   },
 ];
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App() {
   const [displayMode, setDisplayMode] = useState<IInit['displayMode']>('integrated');
   const [isSideDrawerOpen, setIsSideDrawerOpen] = useState(false);
   const [sideDrawerTab, setSideDrawerTab] = useState<'config' | 'snippet'>('config');
@@ -78,6 +81,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
     setPluginInView(false);
   }, [displayMode]);
+
 
   const methods = useForm<IFormConfigurator>({
     defaultValues: INITIAL_FORM_CONFIG,
@@ -239,11 +243,16 @@ export default function App({ Component, pageProps }: AppProps) {
                         < IntegratedPlugin tab={displayMode} />
                       </div>
                       <span className="flex justify-center text-center text-xs text-[#9D9DA6] mb-2">
-                        {displayMode === 'modal' ? 'Jupiter renders as a modal and takes up the whole screen.' : null}
-                        {displayMode === 'integrated' ? 'Jupiter renders as a part of your dApp.' : null}
-                        {displayMode === 'widget'
-                          ? 'Jupiter renders as part of a widget that can be placed at different positions on your dApp.'
-                          : null}
+                       {displayMode: "integrated"; 
+                       integratedTargetId: string; // Required: ID of the container element
+                       containerStyles?: {
+                       width?: string;
+                       height?: string;
+                       borderRadius?: string;
+                       overflow?: string;
+                       };
+                       containerClassName?: string;
+                       }
                       </span>
                     </div>
                   </ShouldWrapWalletProvider>
