@@ -240,8 +240,6 @@ export default function App() {
                             <UnifiedWalletButton />
                     </div>
                   </ShouldWrapWalletProvider>
-              </div>
-            </div>
           </div>
           <Upsell/>
           <Footer />
