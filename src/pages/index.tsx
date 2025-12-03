@@ -1,5 +1,5 @@
 import React from 'react';
-import PluginComponent from '@/components/plugin';
+import PluginComponent from 'src/components/plugin';
 
 export default function Home() {
   return (
