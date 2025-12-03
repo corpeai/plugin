@@ -249,7 +249,6 @@ export default function App({ Component, pageProps }: AppProps) {
                 setAsLegacyTransaction={setAsLegacyTransaction}
                 watchAllFields={watchAllFields}
                 formProps={formProps}
-                displayMode={displayMode}
                 scriptDomain={scriptDomain}
                 rpcUrl={rpcUrl}
                 ShouldWrapWalletProvider={ShouldWrapWalletProvider}
