@@ -241,8 +241,8 @@ export default function App({ Component, pageProps }: AppProps) {
               <AppContent
                 Component={Component}
                 pageProps={pageProps}
-                displayMode={displayMode) 
-                setDisplayMode=(setDisplayMode)
+                displayMode={displayMode} 
+                setDisplayMode=(setDisplayMode}
                 tab={tab}
                 setTab={setTab}
                 asLegacyTransaction={asLegacyTransaction}
