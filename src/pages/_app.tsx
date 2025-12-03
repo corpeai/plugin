@@ -243,16 +243,7 @@ export default function App() {
                         < IntegratedPlugin tab={displayMode} />
                       </div>
                       <span className="flex justify-center text-center text-xs text-[#9D9DA6] mb-2">
-                       {displayMode:} "integrated";                       
-                       integratedTargetId: string; // Required: ID of the container element
-                       containerStyles?: {
-                       width?: string;
-                       height?: string;
-                       borderRadius?: string;
-                       overflow?: string;
-                       };
-                       containerClassName?: string;
-                       }
+                       {displayMode: 'integrated' integratedTargetId: string}
                       </span>
                     </div>
                   </ShouldWrapWalletProvider>
