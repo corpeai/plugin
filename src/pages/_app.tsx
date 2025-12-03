@@ -238,7 +238,6 @@ export default function App() {
                             })}
                           >
                             <UnifiedWalletButton />
-                          </div>
                     </div>
                   </ShouldWrapWalletProvider>
                 </div>
