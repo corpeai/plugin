@@ -49,18 +49,19 @@ const queryClient = new QueryClient({
   },
 });
 
-const PLUGIN_MODE: { label: string; value: IInit['displayMode'] }[] = [
-  {
-    label: 'Modal',
-    value: 'modal',
+window.Jupiter.init({
+  displayMode: "integrated",
+  integratedTargetId: "target-container",
+  formProps: {
+    fixedMint: "So11111111111111111111111111111111111111112",
   },
+});
+
+
+const PLUGIN_MODE: { label: string; value: IInit['displayMode'] }[] = [
   {
     label: 'Integrated',
     value: 'integrated',
-  },
-  {
-    label: 'Widget',
-    value: 'widget',
   },
 ];
 
@@ -235,7 +236,7 @@ export default function App({ Component, pageProps }: AppProps) {
                             <UnifiedWalletButton />
                           </div>
                         </div>
-                        < IntergratedPlugin tab={displayMode} />
+                        < IntegratedPlugin tab={displayMode} />
                       </div>
                       <span className="flex justify-center text-center text-xs text-[#9D9DA6] mb-2">
                         {displayMode === 'modal' ? 'Jupiter renders as a modal and takes up the whole screen.' : null}
