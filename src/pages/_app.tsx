@@ -235,7 +235,7 @@ export default function App() {
                             <UnifiedWalletButton />
                           </div>
                         </div>
-                        <PluginGroup tab={displayMode} />
+                        < IntergratedPlugin tab={displayMode} />
                       </div>
                       <span className="flex justify-center text-center text-xs text-[#9D9DA6] mb-2">
                         {displayMode === 'modal' ? 'Jupiter renders as a modal and takes up the whole screen.' : null}
