@@ -64,7 +64,7 @@ const PLUGIN_MODE: { label: string; value: IInit['displayMode'] }[] = [
   },
 ];
 
-export default function App() {
+export default function App({ Component, pageProps }: AppProps) {
   const [displayMode, setDisplayMode] = useState<IInit['displayMode']>('integrated');
   const [isSideDrawerOpen, setIsSideDrawerOpen] = useState(false);
   const [sideDrawerTab, setSideDrawerTab] = useState<'config' | 'snippet'>('config');
