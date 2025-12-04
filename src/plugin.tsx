@@ -6,7 +6,7 @@ export default function PluginComponent() {
   useEffect(() => {
     if (typeof window !== "undefined") {
       window.Jupiter.init({
-        displayMode: "widget",
+        displayMode: "integrated",
         integratedTargetId: "jupiter-plugin",
       });
     }
