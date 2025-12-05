@@ -5,7 +5,7 @@ import React, { ReactNode, useEffect, useMemo, useState } from 'react';
 import 'tailwindcss/tailwind.css';
 import '../styles/globals.css';
 
-import AppHeader from 'src/components/AppHeader/AppHeader';
+//import AppHeader from 'src/components/AppHeader/AppHeader';
 import Footer from 'src/components/Footer/Footer';
 
 import { SolflareWalletAdapter, UnsafeBurnerWalletAdapter } from '@solana/wallet-adapter-wallets';
@@ -14,7 +14,7 @@ import CodeBlocks from 'src/components/CodeBlocks/CodeBlocks';
 //import FormConfigurator from 'src/components/FormConfigurator';
 //import { IFormConfigurator, INITIAL_FORM_CONFIG } from 'src/constants';
 import { IInit } from 'src/types';
-import V2SexyChameleonText from 'src/components/SexyChameleonText/V2SexyChameleonText';
+//import V2SexyChameleonText from 'src/components/SexyChameleonText/V2SexyChameleonText';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { setPluginInView } from 'src/stores/jotai-plugin-in-view';
 import { cn } from 'src/misc/cn';
@@ -128,22 +128,7 @@ export default function App() {
         }}
       />
      
-          <AppHeader/>
-          <div>
-            <div className="px-2">
-              <div className="flex flex-col items-center h-full w-full md:mt-5">
-                <div className="flex flex-col justify-center items-center text-center">
-                  <div className="flex space-x-2">
-                    <V2SexyChameleonText animate={false} className="text-4xl md:text-[60px] md:h-[66px] font-semibold flex flex-row items-center ">
-                      Jupiter Plugin
-                    </V2SexyChameleonText>
-                  </div>
-                  <p className="text-[#9D9DA6] text-md mt-4 heading-[24px]">
-                    Seamlessly embed a full Jupiter Ultra Swap directly in your application
-                  </p>
-                </div>
-              </div>
-
+<div/>
               <div className="flex justify-center">
                 <div className="max-w-[420px] mt-8 rounded-3xl flex flex-col md:flex-row w-full relative border border-white/10">
                   <ShouldWrapWalletProvider>
