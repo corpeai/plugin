@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState, memo } from 'react';
 import { useUnifiedWallet, useUnifiedWalletContext } from '@jup-ag/wallet-adapter';
 import { useFormContext, useWatch } from 'react-hook-form';
 
-const IntegratedPlugin = memo(() => {
+export const IntegratedPlugin = memo(() => {
   const { control } = useFormContext();
   const simulateWalletPassthrough = useWatch({ control, name: 'simulateWalletPassthrough' });
   const formProps = useWatch({ control, name: 'formProps' });
