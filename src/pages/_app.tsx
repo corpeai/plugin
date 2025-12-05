@@ -9,7 +9,7 @@ import '../styles/globals.css';
 import Footer from 'src/components/Footer/Footer';
 
 import { SolflareWalletAdapter, UnsafeBurnerWalletAdapter } from '@solana/wallet-adapter-wallets';
-//import { FormProvider, useForm, useWatch } from 'react-hook-form';
+import { useWatch } from 'react-hook-form';
 import CodeBlocks from 'src/components/CodeBlocks/CodeBlocks';
 //import FormConfigurator from 'src/components/FormConfigurator';
 //import { IFormConfigurator, INITIAL_FORM_CONFIG } from 'src/constants';
@@ -58,9 +58,7 @@ const PLUGIN_MODE: { label: string; value: IInit['displayMode'] }[] = [
 
 export default function App() {
   const [displayMode, setDisplayMode] = useState<IInit['displayMode']>('integrated');
-  const [isSideDrawerOpen, setIsSideDrawerOpen] = useState(false);
-  const [sideDrawerTab, setSideDrawerTab] = useState(false);
-
+ 
   // Cleanup on tab change
   useEffect(() => {
     if (window.Jupiter._instance) {
