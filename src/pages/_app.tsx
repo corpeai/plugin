@@ -155,11 +155,7 @@ export default function App() {
                           </div>
                         </div>
                         <PluginGroup tab={displayMode} />
-                      <div
-                      <span className="flex justify-center text-center text-xs text-[#9D9DA6] mb-2">
-                        {displayMode === 'integrated' ? 'Jupiter renders as a part of your dApp.' : null}
-                      </span>
-                    >
+                        <div>
                    </>
                   </ShouldWrapWalletProvider>
                 </div>
