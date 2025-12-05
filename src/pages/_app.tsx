@@ -71,7 +71,6 @@ export default function App() {
   }, [displayMode]);
 
 
-  const { control } = methods;
   const simulateWalletPassthrough = useWatch({ control, name: 'simulateWalletPassthrough' });
 
   // Solflare wallet adapter comes with Metamask Snaps supports
