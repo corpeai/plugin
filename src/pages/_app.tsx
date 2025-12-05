@@ -18,8 +18,7 @@ import V2SexyChameleonText from 'src/components/SexyChameleonText/V2SexyChameleo
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { setPluginInView } from 'src/stores/jotai-plugin-in-view';
 import { cn } from 'src/misc/cn';
-import { PluginGroup } from 'src/content/PluginGroup';
-import SideDrawer from 'src/components/SideDrawer/SideDrawer';
+import { IntegratedPlugin } from 'src/content/PluginGroup';
 import JupiterLogo from 'src/icons/JupiterLogo';
 import CloseIcon from 'src/icons/CloseIcon';
 import { Upsell } from 'src/components/Upsell';
@@ -50,10 +49,6 @@ const queryClient = new QueryClient({
 });
 
 const PLUGIN_MODE: { label: string; value: IInit['displayMode'] }[] = [
-  {
-    label: 'Modal',
-    value: 'modal',
-  },
   {
     label: 'Integrated',
     value: 'integrated',
@@ -135,48 +130,6 @@ export default function App() {
           handle: '@JupiterExchange',
         }}
       />
-      <FormProvider {...methods}>
-        <div className="bg-landing-bg h-screen w-screen max-w-screen overflow-x-hidden flex flex-col justify-between gap-y-10">
-          {/* Side Drawer */}
-          <SideDrawer isOpen={isSideDrawerOpen} setIsOpen={setIsSideDrawerOpen}>
-            <div className="flex flex-col h-full">
-              <div className="flex justify-between items-center py-4 px-4 text-white gap-2 border-b border-white/10">
-                <h1 className="flex items-center text-lg font-semibold text-white">
-                  <JupiterLogo />
-                  <span className="ml-3">Jupiter</span>
-                </h1>
-                <button
-                  className="p-2 text-white/50 hover:text-gray-300 transition-colors"
-                  onClick={() => setIsSideDrawerOpen(false)}
-                  aria-label="Close drawer"
-                >
-                  <CloseIcon width={20} height={20} />
-                </button>
-              </div>
-
-              <div className="flex justify-between items-center my-4 mx-4 text-white gap-2 border border-white/10 rounded-full">
-                <button
-                  className={cn('flex-1 p-2 rounded-full text-landing-primary', {
-                    'bg-landing-primary/20 ': sideDrawerTab === 'config',
-                  })}
-                  onClick={() => setSideDrawerTab('config')}
-                >
-                  Config
-                </button>
-                <button
-                  className={cn('flex-1 p-2 rounded-full text-landing-primary', {
-                    'bg-landing-primary/20 ': sideDrawerTab === 'snippet',
-                  })}
-                  onClick={() => setSideDrawerTab('snippet')}
-                >
-                  Snippet
-                </button>
-              </div>
-              <div className="flex-1 overflow-y-auto px-4 py-2">
-                {sideDrawerTab === 'config' ? <FormConfigurator /> : <CodeBlocks displayMode={'integrated'} />}
-              </div>
-            </div>
-          </SideDrawer>
           <AppHeader/>
           <div>
             <div className="px-2">
@@ -235,7 +188,7 @@ export default function App() {
                             <UnifiedWalletButton />
                           </div>
                         </div>
-                        <JupiterTerminal mode="integrated" onClose={() => onOpenChange(false)} />
+                        <IntegratedPlugin mode="integrated" />
                     </div>
                   </ShouldWrapWalletProvider>
                 </div>
@@ -245,7 +198,6 @@ export default function App() {
           <Upsell/>
           <Footer />
         </div>
-      </FormProvider>
     </QueryClientProvider>
   );
 }
