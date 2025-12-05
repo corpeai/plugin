@@ -1,80 +1,206 @@
-import React, { useCallback, useEffect, useState, memo } from 'react';
-import { useUnifiedWallet, useUnifiedWalletContext } from '@jup-ag/wallet-adapter';
-import { useFormContext, useWatch } from 'react-hook-form';
+import { UnifiedWalletButton, UnifiedWalletProvider } from '@jup-ag/wallet-adapter';
+import { DefaultSeo } from 'next-seo';
+import React, { ReactNode, useEffect, useMemo, useState } from 'react';
 
-export const IntegratedPlugin = memo(() => {
-  const { control } = useFormContext();
-  const simulateWalletPassthrough = useWatch({ control, name: 'simulateWalletPassthrough' });
-  const formProps = useWatch({ control, name: 'formProps' });
-  const defaultExplorer = useWatch({ control, name: 'defaultExplorer' });
-  const branding = useWatch({ control: control, name: 'branding' });
-  const [isLoaded, setIsLoaded] = useState(false);
+import 'tailwindcss/tailwind.css';
+import '../styles/globals.css';
 
-  const passthroughWalletContextState = useUnifiedWallet();
-  const { setShowModal } = useUnifiedWalletContext();
+import AppHeader from 'src/components/AppHeader/AppHeader';
+import Footer from 'src/components/Footer/Footer';
 
-  const launchPlugin = useCallback(async () => {
-    window.Jupiter.init({
-      displayMode: 'integrated',
-      integratedTargetId: 'target-container',
+import { SolflareWalletAdapter, UnsafeBurnerWalletAdapter } from '@solana/wallet-adapter-wallets';
+//import { FormProvider, useForm, useWatch } from 'react-hook-form';
+import CodeBlocks from 'src/components/CodeBlocks/CodeBlocks';
+//import FormConfigurator from 'src/components/FormConfigurator';
+//import { IFormConfigurator, INITIAL_FORM_CONFIG } from 'src/constants';
+import { IInit } from 'src/types';
+import V2SexyChameleonText from 'src/components/SexyChameleonText/V2SexyChameleonText';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { setPluginInView } from 'src/stores/jotai-plugin-in-view';
+import { cn } from 'src/misc/cn';
+import { PluginGroup } from 'src/content/PluginGroup';
+import SideDrawer from 'src/components/SideDrawer/SideDrawer';
+import JupiterLogo from 'src/icons/JupiterLogo';
+import CloseIcon from 'src/icons/CloseIcon';
+import { Upsell } from 'src/components/Upsell';
 
-      formProps,
-      enableWalletPassthrough: simulateWalletPassthrough,
-      passthroughWalletContextState: simulateWalletPassthrough ? passthroughWalletContextState : undefined,
-      onRequestConnectWallet: () => setShowModal(true),
-      defaultExplorer,
-      branding,
-    });
-  }, [defaultExplorer, formProps, passthroughWalletContextState, setShowModal, simulateWalletPassthrough, branding]);
+const isDevNodeENV = process.env.NODE_ENV === 'development';
+const isDeveloping = isDevNodeENV && typeof window !== 'undefined';
+// In NextJS preview env settings
+const isPreview = Boolean(process.env.NEXT_PUBLIC_IS_NEXT_PREVIEW);
+if ((isDeveloping || isPreview) && typeof window !== 'undefined') {
+  // Initialize an empty value, simulate webpack IIFE when imported
+  (window as any).Jupiter = {};
 
-  useEffect(() => {
-    let intervalId: NodeJS.Timeout | undefined = undefined;
-    if (!isLoaded || !window.Jupiter.init) {
-      intervalId = setInterval(() => {
-        setIsLoaded(Boolean(window.Jupiter.init));
-      }, 100);
-    }
+  // Perform local fetch on development, and next preview
+  Promise.all([import('../library'), import('../index')]).then((res) => {
+    const [libraryProps, rendererProps] = res;
 
-    if (intervalId) {
-      return () => clearInterval(intervalId);
-    }
-  }, [isLoaded]);
+    (window as any).Jupiter = libraryProps;
+    (window as any).JupiterRenderer = rendererProps;
+  });
+}
 
-  useEffect(() => {
-    setTimeout(() => {
-      if (isLoaded && Boolean(window.Jupiter.init)) {
-        launchPlugin();
-      }
-    }, 100);
-  }, [isLoaded, simulateWalletPassthrough, launchPlugin]);
-
-  // To make sure passthrough wallet are synced
-  useEffect(() => {
-    if (!window.Jupiter.syncProps) return;
-    window.Jupiter.syncProps({ passthroughWalletContextState });
-  }, [passthroughWalletContextState]);
-
-  return (
-    <div className=" w-full rounded-2xl text-white flex flex-col items-center  mb-4 overflow-hidden  ">
-      <div className="flex flex-col lg:flex-row h-full w-full overflow-auto">
-        <div className=" rounded-xl overflow-hidden flex justify-center  h-[555px] w-[360px]">
-          {/* Loading state */}
-          {!isLoaded ? (
-            <div className="h-full animate-pulse mt-4 lg:mt-0 lg:ml-4 flex items-center justify-center rounded-xl">
-              <p>Loading...</p>
-            </div>
-          ) : null}
-
-          <div
-            id="target-container"
-            className={`flex h-full w-full overflow-auto justify-center bg-black rounded-xl border border-white/10 ${!isLoaded ? 'hidden' : ''}`}
-          />
-        </div>
-      </div>
-    </div>
-  );
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
 });
 
-IntegratedPlugin.displayName = 'IntegratedPlugin';
+const PLUGIN_MODE: { label: string; value: IInit['displayMode'] }[] = [
+  {
+    label: 'Integrated',
+    value: 'integrated',
+  },
+];
 
-export default IntegratedPlugin;
+export default function App() {
+  const [displayMode, setDisplayMode] = useState<IInit['displayMode']>('integrated');
+  const [isSideDrawerOpen, setIsSideDrawerOpen] = useState(false);
+  const [sideDrawerTab, setSideDrawerTab] = useState(false);
+
+  // Cleanup on tab change
+  useEffect(() => {
+    if (window.Jupiter._instance) {
+      window.Jupiter._instance = null;
+    }
+
+    setPluginInView(false);
+  }, [displayMode]);
+
+  const methods = useForm<IFormConfigurator>({
+    defaultValues: INITIAL_FORM_CONFIG,
+  });
+
+  const { control } = methods;
+  const simulateWalletPassthrough = useWatch({ control, name: 'simulateWalletPassthrough' });
+
+  // Solflare wallet adapter comes with Metamask Snaps supports
+  const wallets = useMemo(() => [new UnsafeBurnerWalletAdapter(), new SolflareWalletAdapter()], []);
+
+  const ShouldWrapWalletProvider = useMemo(() => {
+    return simulateWalletPassthrough
+      ? ({ children }: { children: ReactNode }) => (
+          <UnifiedWalletProvider
+            wallets={wallets}
+            config={{
+              env: 'mainnet-beta',
+              autoConnect: true,
+              metadata: {
+                name: 'Jupiter Plugin',
+                description: '',
+                url: 'https://plugin.jup.ag',
+                iconUrls: [''],
+              },
+              theme: 'jupiter',
+            }}
+          >
+            {children}
+          </UnifiedWalletProvider>
+        )
+      : React.Fragment;
+  }, [wallets, simulateWalletPassthrough]);
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <DefaultSeo
+        title={'Jupiter Plugin'}
+        openGraph={{
+          type: 'website',
+          locale: 'en',
+          title: 'Plugin: add Jupiter Swap to your website or app',
+          description: 'Bring the perfect swap to any web app. Jupiter Plugin is the easiest way to add full Ultra swap functionality to any website.',
+          url: 'https://plugin.jup.ag/',
+          site_name: 'Jupiter Plugin',
+          images: [
+            {
+              url: `https://plugin.jup.ag/meta-og/jupiter-meta-plugin.webp`,
+              alt: 'Jupiter Aggregator',
+            },
+          ],
+        }}
+        twitter={{
+          cardType: 'summary_large_image',
+          site: 'jup.ag',
+          handle: '@JupiterExchange',
+        }}
+      />
+     
+          <AppHeader/>
+          <div>
+            <div className="px-2">
+              <div className="flex flex-col items-center h-full w-full md:mt-5">
+                <div className="flex flex-col justify-center items-center text-center">
+                  <div className="flex space-x-2">
+                    <V2SexyChameleonText animate={false} className="text-4xl md:text-[60px] md:h-[66px] font-semibold flex flex-row items-center ">
+                      Jupiter Plugin
+                    </V2SexyChameleonText>
+                  </div>
+                  <p className="text-[#9D9DA6] text-md mt-4 heading-[24px]">
+                    Seamlessly embed a full Jupiter Ultra Swap directly in your application
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex justify-center">
+                <div className="max-w-[420px] mt-8 rounded-3xl flex flex-col md:flex-row w-full relative border border-white/10">
+                  <ShouldWrapWalletProvider>
+                    <div className=" h-full w-full rounded-xl flex flex-col">
+                      <div className="flex flex-row justify-between py-3 px-2 border-b border-white/10">
+                        {PLUGIN_MODE.map((mode) => (
+                          <button
+                            key={mode.value}
+                            onClick={() => setDisplayMode(mode.value)}
+                            type="button"
+                            className={cn(
+                              'relative px-4 py-2 justify-center text-white/20  rounded-full text-sm flex-1 ',
+                              {
+                                'bg-landing-primary/10 text-landing-primary': displayMode === mode.value,
+                              },
+                            )}
+                          >
+                            {mode.label}
+                          </button>
+                        ))}
+                      </div>
+
+                      <div className="flex flex-grow  justify-center text-white/75 flex-col mx-auto px-2 ">
+                        <div className="flex flex-row justify-between  min-h-[57px] items-center">
+                          <div className="flex justify-between flex-row">
+                            <button
+                              className="relative text-sm text-landing-primary font-semibold p-1  rounded-lg underline"
+                              onClick={() => setIsSideDrawerOpen(true)}
+                            >
+                              Customize
+                              {/* <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256"><path fill="currentColor" d="M128 80a48 48 0 1 0 48 48a48.05 48.05 0 0 0-48-48m0 80a32 32 0 1 1 32-32a32 32 0 0 1-32 32m88-29.84q.06-2.16 0-4.32l14.92-18.64a8 8 0 0 0 1.48-7.06a107.2 107.2 0 0 0-10.88-26.25a8 8 0 0 0-6-3.93l-23.72-2.64q-1.48-1.56-3-3L186 40.54a8 8 0 0 0-3.94-6a107.7 107.7 0 0 0-26.25-10.87a8 8 0 0 0-7.06 1.49L130.16 40h-4.32L107.2 25.11a8 8 0 0 0-7.06-1.48a107.6 107.6 0 0 0-26.25 10.88a8 8 0 0 0-3.93 6l-2.64 23.76q-1.56 1.49-3 3L40.54 70a8 8 0 0 0-6 3.94a107.7 107.7 0 0 0-10.87 26.25a8 8 0 0 0 1.49 7.06L40 125.84v4.32L25.11 148.8a8 8 0 0 0-1.48 7.06a107.2 107.2 0 0 0 10.88 26.25a8 8 0 0 0 6 3.93l23.72 2.64q1.49 1.56 3 3L70 215.46a8 8 0 0 0 3.94 6a107.7 107.7 0 0 0 26.25 10.87a8 8 0 0 0 7.06-1.49L125.84 216q2.16.06 4.32 0l18.64 14.92a8 8 0 0 0 7.06 1.48a107.2 107.2 0 0 0 26.25-10.88a8 8 0 0 0 3.93-6l2.64-23.72q1.56-1.48 3-3l23.78-2.8a8 8 0 0 0 6-3.94a107.7 107.7 0 0 0 10.87-26.25a8 8 0 0 0-1.49-7.06Zm-16.1-6.5a74 74 0 0 1 0 8.68a8 8 0 0 0 1.74 5.48l14.19 17.73a91.6 91.6 0 0 1-6.23 15l-22.6 2.56a8 8 0 0 0-5.1 2.64a74 74 0 0 1-6.14 6.14a8 8 0 0 0-2.64 5.1l-2.51 22.58a91.3 91.3 0 0 1-15 6.23l-17.74-14.19a8 8 0 0 0-5-1.75h-.48a74 74 0 0 1-8.68 0a8 8 0 0 0-5.48 1.74l-17.78 14.2a91.6 91.6 0 0 1-15-6.23L82.89 187a8 8 0 0 0-2.64-5.1a74 74 0 0 1-6.14-6.14a8 8 0 0 0-5.1-2.64l-22.58-2.52a91.3 91.3 0 0 1-6.23-15l14.19-17.74a8 8 0 0 0 1.74-5.48a74 74 0 0 1 0-8.68a8 8 0 0 0-1.74-5.48L40.2 100.45a91.6 91.6 0 0 1 6.23-15L69 82.89a8 8 0 0 0 5.1-2.64a74 74 0 0 1 6.14-6.14A8 8 0 0 0 82.89 69l2.51-22.57a91.3 91.3 0 0 1 15-6.23l17.74 14.19a8 8 0 0 0 5.48 1.74a74 74 0 0 1 8.68 0a8 8 0 0 0 5.48-1.74l17.77-14.19a91.6 91.6 0 0 1 15 6.23L173.11 69a8 8 0 0 0 2.64 5.1a74 74 0 0 1 6.14 6.14a8 8 0 0 0 5.1 2.64l22.58 2.51a91.3 91.3 0 0 1 6.23 15l-14.19 17.74a8 8 0 0 0-1.74 5.53Z"/></svg> */}
+                              <span className="absolute top-1 -right-0.5 h-1.5 w-1.5 rounded-full bg-landing-primary animate-pulse "></span>
+                            </button>
+                          </div>
+                          <div
+                            className={cn('text-white text-center', {
+                              hidden: !simulateWalletPassthrough,
+                            })}
+                          >
+                            <UnifiedWalletButton />
+                          </div>
+                        </div>
+                        <PluginGroup tab={displayMode} />
+                      </div>
+                      <span className="flex justify-center text-center text-xs text-[#9D9DA6] mb-2">
+                        {displayMode === 'integrated' ? 'Jupiter renders as a part of your dApp.' : null}
+                      </span>
+                    </div>
+                  </ShouldWrapWalletProvider>
+                </div>
+              </div>
+            </div>
+          </div>
+          <Upsell/>
+          <Footer />
+        </div>
+    </QueryClientProvider>
+  );
+}
+  
