@@ -17,16 +17,10 @@ const IntegratedPlugin = memo(() => {
     window.Jupiter.init({
       displayMode: 'integrated',
       integratedTargetId: 'target-container',
-      defaultExplorer: "Solscan",
       formProps: {
       fixedMint: "",
       referralFee: 40,
       referralAccount: "8887434347798088447",
-  },
-  branding: {
-    name: "CorpAi",
-  },
-
  
 
       formProps,
