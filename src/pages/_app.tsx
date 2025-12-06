@@ -217,7 +217,7 @@ export default function App() {
                         {displayMode === 'integrated' ? 'Jupiter renders as a part of your dApp.' : null}
                       </span>
                     </div>
-                  </ShouldWrapWalletProvider>
+                  <ShouldWrapWalletProvider />
                 </div>
               </div>
             </div>
