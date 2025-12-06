@@ -51,7 +51,7 @@
 
 /* Custom scroll bar */
 .webkit-scrollbar::-webkit-scrollbar {
-  width: 8px;
+  width: 0px;
 }
 
 .webkit-scrollbar::-webkit-scrollbar-thumb {
