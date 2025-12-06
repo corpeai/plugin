@@ -124,11 +124,11 @@ const RenderShell = (props: IInit) => {
   const contentClassName = useMemo(() => {
     // Default Modal
     if (!displayMode || displayMode === 'modal' || displayMode === 'integrated') {
-      return `flex flex-col h-[600px] w-full max-w-[575px] overflow-auto text-black relative bg-black rounded-lg webkit-scrollbar ${
+      return `flex flex-col h-[650px] w-full max-w-[575px] overflow-auto text-black relative bg-black rounded-lg webkit-scrollbar ${
         containerClassName || ''
       }`;
     } else if (displayMode === 'widget') {
-      return 'flex flex-col  h-[600px] w-full overflow-auto text-black relative webkit-scrollbar';
+      return 'flex flex-col  h-[650px] w-full overflow-auto text-black relative webkit-scrollbar';
     }
   }, [containerClassName, displayMode]);
 
@@ -228,7 +228,7 @@ const RenderWidgetShell = (props: IInit) => {
 
       <div
         id="target-container"
-        className={`absolute overflow-hidden ${classes.contentClassName} flex flex-col w-[90vw] h-[600px] max-w-[575px] max-h-[75vh] rounded-2xl bg-black transition-opacity duration-300 shadow-2xl ${
+        className={`absolute overflow-hidden ${classes.contentClassName} flex flex-col w-[90vw] h-[650px] max-w-[575px] max-h-[75vh] rounded-2xl bg-black transition-opacity duration-300 shadow-2xl ${
           !isOpen ? '!h-0 !w-0 opacity-0' : 'opacity-100'
         }`}
       >
