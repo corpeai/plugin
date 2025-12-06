@@ -75,7 +75,7 @@ const CodeBlocks = ({ displayMode }: { displayMode: IInit['displayMode'] }) => {
     if (displayMode === 'integrated') {
       return `<!-- Prepare a div in your <body> for Plugin to render -->
 <!-- Adjust the width and height to suit your requirements -->
-<div id="target-container" style="width: 400px; height: 568px;"></div>
+<div id="target-container" style="width: 575px; height: 600px;"></div>
 `;
     }
 
