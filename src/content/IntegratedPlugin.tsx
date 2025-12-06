@@ -24,11 +24,11 @@ const IntegratedPlugin = memo(() => {
       passthroughWalletContextState: simulateWalletPassthrough ? passthroughWalletContextState : undefined,
       onRequestConnectWallet: () => setShowModal(true),
       defaultExplorer,
-      referralFee: 40,
-      referralAccount: "8887434347798088447",   
+      referralFee,
+      referralAccount,   
       branding,
     });
-  }, [defaultExplorer, referralFee, referralAccount, formProps, passthroughWalletContextState, setShowModal, simulateWalletPassthrough, branding]);
+  }, [defaultExplorer, formProps, passthroughWalletContextState, setShowModal, simulateWalletPassthrough, branding]);
 
   useEffect(() => {
     let intervalId: NodeJS.Timeout | undefined = undefined;
