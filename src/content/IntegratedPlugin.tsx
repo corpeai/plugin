@@ -17,20 +17,18 @@ const IntegratedPlugin = memo(() => {
     window.Jupiter.init({
       displayMode: 'integrated',
       integratedTargetId: 'target-container',
-      formProps: {
-      fixedMint: "",
-      referralFee: 40,
-      referralAccount: "8887434347798088447",
+     
  
-
       formProps,
       enableWalletPassthrough: simulateWalletPassthrough,
       passthroughWalletContextState: simulateWalletPassthrough ? passthroughWalletContextState : undefined,
       onRequestConnectWallet: () => setShowModal(true),
       defaultExplorer,
+      referralFee: 40,
+      referralAccount: "8887434347798088447",   
       branding,
     });
-  }, [defaultExplorer, formProps, passthroughWalletContextState, setShowModal, simulateWalletPassthrough, branding]);
+  }, [defaultExplorer, referralFee, referralAccount, formProps, passthroughWalletContextState, setShowModal, simulateWalletPassthrough, branding]);
 
   useEffect(() => {
     let intervalId: NodeJS.Timeout | undefined = undefined;
