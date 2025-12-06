@@ -70,9 +70,6 @@ export default function App() {
     setPluginInView(false);
   }, [displayMode]);
 
-  //const methods = useForm<IFormConfigurator>({
-    defaultValues: INITIAL_FORM_CONFIG,
-  });
 
   const { control } = methods;
   const simulateWalletPassthrough = useWatch({ control, name: 'simulateWalletPassthrough' });
