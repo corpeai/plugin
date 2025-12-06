@@ -23,9 +23,7 @@ const IntegratedPlugin = memo(() => {
       enableWalletPassthrough: simulateWalletPassthrough,
       passthroughWalletContextState: simulateWalletPassthrough ? passthroughWalletContextState : undefined,
       onRequestConnectWallet: () => setShowModal(true),
-      defaultExplorer,
-      referralFee,
-      referralAccount,   
+      defaultExplorer,  
       branding,
     });
   }, [defaultExplorer, formProps, passthroughWalletContextState, setShowModal, simulateWalletPassthrough, branding]);
