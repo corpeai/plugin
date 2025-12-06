@@ -134,7 +134,7 @@ export default function App() {
           {/* Side Drawer */}
           <SideDrawer isOpen={isSideDrawerOpen} setIsOpen={setIsSideDrawerOpen}>
             <div className="flex flex-col h-full">
-              <div className="flex justify-between items-center py-4 px-4 text-white gap-2 border-b border-white/10">
+              <div className="flex justify-between items-center py-4 px-4 text-white gap-2 border-b border-white/0">
                 <h1 className="flex items-center text-lg font-semibold text-white">
                   <JupiterLogo />
                   <span className="ml-3">Jupiter</span>
@@ -231,7 +231,7 @@ export default function App() {
                         <PluginGroup tab={displayMode} />
                       </div>
                       <span className="flex justify-center text-center text-xs text-[#000000] mb-1">
-                        {displayMode === '' ? 'CorpeAI.' : null}
+                        {displayMode === 'integrated' ? 'CorpeAI.' : null}
                        </span> 
                     </div>
                   </ShouldWrapWalletProvider>
