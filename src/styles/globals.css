@@ -11,8 +11,8 @@
    
 }
 #jupiter-plugin * {
-   min-height: 550px;
-   width: 4000px;
+ min-height: 550px;
+  width: 420px;
   box-sizing: border-box;
   font-family: Inter, sans-serif;
 }
