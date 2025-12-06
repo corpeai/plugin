@@ -17,6 +17,17 @@ const IntegratedPlugin = memo(() => {
     window.Jupiter.init({
       displayMode: 'integrated',
       integratedTargetId: 'target-container',
+      defaultExplorer: "Solscan",
+      formProps: {
+      fixedMint: "",
+      referralFee: 40,
+      referralAccount: "8887434347798088447",
+  },
+  branding: {
+    name: "CorpAi",
+  },
+});
+ 
 
       formProps,
       enableWalletPassthrough: simulateWalletPassthrough,
@@ -57,7 +68,7 @@ const IntegratedPlugin = memo(() => {
   return (
     <div className=" w-full rounded-2xl text-white flex flex-col items-center  mb-4 overflow-hidden  ">
       <div className="flex flex-col lg:flex-row h-full w-full overflow-auto">
-        <div className=" rounded-xl overflow-hidden flex justify-center  h-[550px] w-[440px]">
+        <div className=" rounded-xl overflow-hidden flex justify-center  h-[550px] w-[380px]">
           {/* Loading state */}
           {!isLoaded ? (
             <div className="h-full animate-pulse mt-4 lg:mt-0 lg:ml-4 flex items-center justify-center rounded-xl">
@@ -67,7 +78,7 @@ const IntegratedPlugin = memo(() => {
 
           <div
             id="target-container"
-            className={`flex h-full w-full overflow-auto justify-center bg-black rounded-xl border border-white/10 ${!isLoaded ? 'hidden' : ''}`}
+            className={`flex h-full w-full overflow-auto justify-center bg-black rounded-xl border border-white/4 ${!isLoaded ? 'hidden' : ''}`}
           />
         </div>
       </div>
