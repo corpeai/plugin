@@ -28,7 +28,7 @@ const IntegratedPlugin = memo(() => {
       referralAccount: "8887434347798088447",   
       branding,
     });
-  }, [defaultExplorer, referralFee, referralAccount, formProps, passthroughWalletContextState, setShowModal, simulateWalletPassthrough, branding]);
+  }, [defaultExplorer, formProps, passthroughWalletContextState, setShowModal, simulateWalletPassthrough, branding]);
 
   useEffect(() => {
     let intervalId: NodeJS.Timeout | undefined = undefined;
