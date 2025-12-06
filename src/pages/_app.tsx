@@ -187,8 +187,9 @@ export default function App() {
 
               <div className="flex justify-center">
                 <div className="max-w-[420px] mt-8 rounded-3xl flex flex-col md:flex-row w-full relative border border-white/10">
-                </ShouldWrapWalletProvider>
-                 
+                 </div>
+                  </ShouldWrapWalletProvider>
+                </div>
 
                       <div className="flex flex-grow  justify-center text-white/75 flex-col mx-auto px-2 ">
                         <div className="flex flex-row justify-between  min-h-[57px] items-center">
