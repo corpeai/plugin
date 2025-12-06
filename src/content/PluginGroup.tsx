@@ -9,7 +9,7 @@ interface PluginGroupProps {
 
 export const PluginGroup = ({ tab }: PluginGroupProps) => {
   return (
-    <div className='min-h-[550px] w-[5500px]'>
+    <div className='min-h-[575px] w-[600px]'>
       {tab === 'modal' ? <ModalPlugin /> : null}
       {tab === 'integrated' ? <IntegratedPlugin /> : null}
       {tab === 'widget' ? <WidgetPlugin /> : null}
