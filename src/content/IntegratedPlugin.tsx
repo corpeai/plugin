@@ -26,7 +26,7 @@ const IntegratedPlugin = memo(() => {
   branding: {
     name: "CorpAi",
   },
-});
+
  
 
       formProps,
