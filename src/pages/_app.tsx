@@ -188,17 +188,17 @@ export default function App() {
               </div>
 
                <div className="flex justify-center">
-                <div className="max-w-[440px] mt-8 rounded-0x0 flex flex-col md:flex-row w-full relative border border-white/2">
+                <div className="max-w-[575px] mt-8 rounded-0x0 flex flex-col md:flex-row w-full relative border border-white/0">
                   <ShouldWrapWalletProvider>
                     <div className=" h-full w-full rounded-xl flex flex-col">
-                      <div className="flex flex-row justify-between py-0 px-0 border-b border-white/10">
+                      <div className="flex flex-row justify-between py-0 px-0 border-b border-white/1">
                         {PLUGIN_MODE.map((mode) => (
                           <button
                             key={mode.value}
                             onClick={() => setDisplayMode(mode.value)}
                             type="button"
                             className={cn(
-                              'relative px-0 py-0 justify-center text-white/20  rounded-full text-sm flex-1 ',
+                              'relative px-0 py-0 justify-center text-white/0  rounded-full text-sm flex-1 ',
                               {
                                 'bg-landing-primary/0 text-landing-primary': displayMode === mode.value,
                               },
@@ -230,7 +230,7 @@ export default function App() {
                         </div>
                         <PluginGroup tab={displayMode} />
                       </div>
-                      <span className="flex justify-center text-center text-xs text-[#9D9DA6] mb-1">
+                      <span className="flex justify-center text-center text-xs text-[#000000] mb-1">
                         {displayMode === 'integrated' ? 'CorpeAI.' : null}
                        </span> 
                     </div>
