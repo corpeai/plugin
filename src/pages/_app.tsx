@@ -225,7 +225,7 @@ export default function App() {
           <Upsell/>
           <Footer />
         </div>
-      </FormProvider>
-    </QueryClientProvider>
+      <FormProvider />
+    <QueryClientProvider />
   );
 }
