@@ -7,8 +7,12 @@
   --jupiter-plugin-warning: 251, 191, 36;
   --jupiter-plugin-interactive: 33, 42, 54;
   --jupiter-plugin-module: 16, 23, 31;
+
+   
 }
 #jupiter-plugin * {
+   min-height: 550px;
+   width: 4000px;
   box-sizing: border-box;
   font-family: Inter, sans-serif;
 }
