@@ -68,7 +68,7 @@ const IntegratedPlugin = memo(() => {
 
           <div
             id="target-container"
-            className={`flex h-full w-full overflow-auto justify-center bg-black rounded-xl border border-white/4 ${!isLoaded ? 'hidden' : ''}`}
+            className={`flex h-full w-full overflow-auto justify-center bg-black rounded-xl border border-white/0 ${!isLoaded ? 'hidden' : ''}`}
           />
         </div>
       </div>
