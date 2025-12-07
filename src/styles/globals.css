@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --jupiter-plugin-primary: 199, 242, 132;
-  --jupiter-plugin-background: 0, 0, 0;
-  --jupiter-plugin-primary-text: 232, 249, 255;
+  --jupiter-plugin-primary: 13, 23, 243;
+  --jupiter-plugin-background: 96, 97, 114;
+  --jupiter-plugin-primary-text: 255, 255, 255;
   --jupiter-plugin-warning: 251, 191, 36;
-  --jupiter-plugin-interactive: 33, 42, 54;
+  --jupiter-plugin-interactive: 96, 97, 114;
   --jupiter-plugin-module: 16, 23, 31;
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
