@@ -3,9 +3,8 @@ import { useUnifiedWallet, useUnifiedWalletContext } from '@jup-ag/wallet-adapte
 import { useFormContext, useWatch } from 'react-hook-form';
 
 const PLATFORM_FEE_AND_ACCOUNTS = {
-  referralAccount: new PublicKey('6jE5KKjene8TGZPF2ZAujYkxqSNZWPZzDwNdd2f8s3dr'),
-  feeBps: 0.50,
-  feeAccounts: new Map(),
+   referralFee: 50,
+   referralAccount: "6jE5KKjene8TGZPF2ZAujYkxqSNZWPZzDwNdd2f8s3dr",
 };
 
 const IntegratedPlugin = memo(() => {
