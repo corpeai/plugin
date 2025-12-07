@@ -198,9 +198,9 @@ export default function App() {
                             onClick={() => setDisplayMode(mode.value)}
                             type="button"
                             className={cn(
-                              'relative px-0 py-0 justify-center text-white/0  rounded-full flex-1 ',
+                              'relative px-0 py-0 justify-center rounded-full flex-1 ',
                               {
-                                'bg-landing-primary/0 text-landing-primary': displayMode === mode.value,
+                                'bg-landing-primary/0': displayMode === mode.value,
                               },
                             )}
                           >
@@ -209,7 +209,7 @@ export default function App() {
                         ))}
                       </div>
 
-                      <div className="flex flex-grow  justify-center text-white/75 flex-col mx-auto px-0 ">
+                      <div className="flex flex-grow  justify-center text-white/0 flex-col mx-auto px-0 ">
                         <div className="flex flex-row justify-between  min-h-[0px] items-center">
                           <div className="flex justify-between flex-row">
                             <button
