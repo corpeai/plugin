@@ -26,7 +26,7 @@ const AppHeader: React.FC<AppHeaderProps> = () => {
         <div className="flex items-center p-4">
           <h1 className="flex items-center text-lg font-semibold text-white">
               <JupiterLogo/>
-              <span className="ml-3">Jupiter Plugin</span>
+              <span className="ml-3">GoDeFi</span>
             </h1>
         </div>
       </div>
