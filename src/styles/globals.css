@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Open+Sans:wght@400;500&display=swap');
-@tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 :root {
   --jupiter-plugin-primary: 199, 242, 132;
   --jupiter-plugin-background: 0, 0, 0;
@@ -9,10 +9,6 @@
   --jupiter-plugin-warning: 251, 191, 36;
   --jupiter-plugin-interactive: 33, 42, 54;
   --jupiter-plugin-module: 16, 23, 31;
-
-
-@layer base {
-  :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
@@ -68,10 +64,7 @@
   }
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
+
   body {
     @apply bg-background text-foreground;
     font-family: 'Open Sans', sans-serif;
