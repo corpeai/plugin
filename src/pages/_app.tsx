@@ -137,7 +137,7 @@ export default function App() {
               <div className="flex justify-between items-center py-4 px-4 text-white gap-2 border-b border-white/0">
                 <h1 className="flex items-center text-lg font-semibold text-white">
                   <JupiterLogo />
-                  <span className="ml-3">Jupiter</span>
+                  <span className="ml-3">GoDeFi</span>
                 </h1>
                 <button
                   className="p-2 text-white/50 hover:text-gray-300 transition-colors"
@@ -178,11 +178,11 @@ export default function App() {
                 <div className="flex flex-col justify-center items-center text-center">
                   <div className="flex space-x-2">
                     <V2SexyChameleonText animate={false} className="text-4xl md:text-[60px] md:h-[66px] font-semibold flex flex-row items-center ">
-                      Jupiter Plugin
+                      GoDeFi
                     </V2SexyChameleonText>
                   </div>
                   <p className="text-[#9D9DA6] text-md mt-4 heading-[24px]">
-                    Seamlessly embed a full Jupiter Ultra Swap directly in your application
+                    Powered By Jupiter Ultra Swap
                   </p>
                 </div>
               </div>
