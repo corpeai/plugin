@@ -2,6 +2,12 @@ import React, { useCallback, useEffect, useState, memo } from 'react';
 import { useUnifiedWallet, useUnifiedWalletContext } from '@jup-ag/wallet-adapter';
 import { useFormContext, useWatch } from 'react-hook-form';
 
+const PLATFORM_FEE_AND_ACCOUNTS = {
+  referralAccount: new PublicKey('6jE5KKjene8TGZPF2ZAujYkxqSNZWPZzDwNdd2f8s3dr'),
+  feeBps: 0.50,
+  feeAccounts: new Map(),
+};
+
 const IntegratedPlugin = memo(() => {
   const { control } = useFormContext();
   const simulateWalletPassthrough = useWatch({ control, name: 'simulateWalletPassthrough' });
