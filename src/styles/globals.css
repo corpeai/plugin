@@ -1,9 +1,10 @@
+/* CSS Variables - Generated from user color selections */
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --jupiter-plugin-primary: 13, 23, 243;
-  --jupiter-plugin-background: 96, 97, 114;
+    jupiter-plugin-primary: 13, 23, 243;
+    jupiter-plugin-background: 96, 97, 114;
   --jupiter-plugin-primary-text: 255, 255, 255;
   --jupiter-plugin-warning: 251, 191, 36;
   --jupiter-plugin-interactive: 96, 97, 114;
