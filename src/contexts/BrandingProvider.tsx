@@ -12,7 +12,7 @@ export const BrandingProvider = (props: PropsWithChildren<IInit>) => {
   const { branding ,children} = props;
 
   const logoUri = useMemo(() => branding?.logoUri? branding.logoUri : 'https://jup.ag/svg/jupiter-logo.svg', [branding?.logoUri]);
-  const name = useMemo(() => branding?.name? branding.name : 'GoDeFi', [branding?.name]);
+  const name = useMemo(() => branding?.name? branding.name : 'Solanica', [branding?.name]);
 
   return <BrandingContext.Provider value={{ logoUri, name }}>{children}</BrandingContext.Provider>;
 };
